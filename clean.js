@@ -7,6 +7,8 @@ const collection = {
     collection_id: '825ac5f6-5849-48f0-9655-71142350e997'
 };
 
+
+
 process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
 
 var discovery = new DiscoveryV1({
