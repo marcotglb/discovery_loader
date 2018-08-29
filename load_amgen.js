@@ -9,15 +9,15 @@ var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 
 
 const collection = {
-    environment_id: '05db4c06-4839-4449-9897-78bf181c9511',
-    collection_id: '825ac5f6-5849-48f0-9655-71142350e997'
-    // configuration_id: '9ce44720-da6e-4041-ab49-e851ce7ab54a'
+    environment_id: 'b1b0f257-c6af-4724-95c4-dc9a7e9f2231',
+    collection_id: '6c7137ec-440c-4a61-87f4-37ce6f6f13be'
+    //configuration_id: '4cb92211-c9a1-4c16-ae57-b6331c85f9e9'
 };
 
 
 var retryOptions = {times: 3, interval: 5000};
 
-process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
+process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials_amgen.json', 'utf-8');
 
 var discovery = new DiscoveryV1({
     //username: '7f17eab1-733f-4be5-a6c1-90ebdfe86ba1',
@@ -26,10 +26,10 @@ var discovery = new DiscoveryV1({
 });
 const client = new Client({
     user: 'admin',
-    host: 'sl-us-south-1-portal.6.dblayer.com',
+    host: 'sl-eu-de-1-portal.9.dblayer.com',
     database: 'compose',
-    password: 'UCWGJGBSMGQOOEWU',
-    port: 44502
+    password: 'AIDSBPDSOOKOPRKF',
+    port: 15507
 });
 
 client.connect();
@@ -53,7 +53,7 @@ var listDocs = function (query, callback) {
 var loadDocument = function (row) {
     //console.log(row.title);
     var newDoc = row;
-    // console.log (row.format);
+     // console.log (row.format);
     if (row.format === 'html')
         {
         row.answer = h2p (row.answer);
@@ -153,7 +153,7 @@ var handleUpdload = function (errorUpload, docs) {
 };
 
 
-client.query('SELECT r.* from chats.answer_units as r', [], (err, res) => {
+client.query('SELECT r.id, r.answer as text, r.title, r.document_id  from chats.answer_units as r', [], (err, res) => {
     var asyncTasks = [];
     for (var i in res.rows)
             // if (i < 4)
