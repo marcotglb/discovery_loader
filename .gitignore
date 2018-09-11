@@ -1,2 +1,4 @@
 /node_modules/
 /nbproject/private/
+credentials.json
+credentials_amgen.json
